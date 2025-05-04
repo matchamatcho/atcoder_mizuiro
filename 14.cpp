@@ -30,6 +30,7 @@ const ll INFL = 4e18;
 
 int main()
 {
+    int aaaaaaa;
     
     
 
