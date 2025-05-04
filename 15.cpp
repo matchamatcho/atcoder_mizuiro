@@ -30,36 +30,33 @@ const ll INFL = 4e18;
 
 int main()
 {
-    int n,k;
-    cin>>n>>k;
-    vll a(n);
-    rep(i,n)cin>>a[i];
-    ll ans=INFL;
-    for(int bit=0;bit<(1<<n);bit++){
-        ll mx=0;
-        ll now=0;
-        set<ll>st;
-        rep(i,n){
-            if(mx<a[i]){
-                st.insert(i);
-                mx=a[i];
+    int n;
+    cin>>n;
+    vector<pair<ld,ld> >xy;
+    rep(i,n){
+        ld x,y;
+        cin>>x>>y;
+        xy.push_back(mkpr((ld)x,(ld)y));
+        // cout<<x<<' '<<y<<endl;
 
-            }
-            else{
-                if(bit&(1<<i)){
-                    now+=mx-a[i]+1;
-                    st.insert(i);
-                    mx=mx+1;
-                
-                }
 
-            }
-        }
-        if(st.size()>=k)ans=min(ans,now);
     }
-    cout<<ans<<endl;
-    
-    
+    vint p(n);
+    int k=1;
+    rep(i,n)k*=1+i;
+    // cout<<k<<endl;
+    rep(i,n)p[i]=i;
+    long double sum=0;
+    do{
+        rep(i,n-1){
+            long double dx=xy[p[i]].first-xy[p[i+1]].first,dy=xy[p[i]].second-xy[p[i+1]].second;
+            // cout<<dx<<endl;
+            sum+=sqrtl(dx*dx+dy*dy);
+        }
+    }while(next_permutation(p.begin(), p.end()));
+    sum /= (ld)k;
+    printf("%.10Lf\n",sum);
+
     
 
     return 0;
