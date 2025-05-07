@@ -28,9 +28,34 @@ const int INF =1001001001;
 const ll INFL = 4e18;
 
 
+
+double f1(double x){
+    return x;
+};
+
 int main()
 {
-    //
+    //a
+    double p;
+    cin>>p;
+
+    
+    auto f=[&](double x)->double{
+        return x+p/pow(2.0,(double)2.0*x/3.0);
+
+    };
+    int cnt = 500;
+    double low = 0, high = INFL;
+    while (cnt--) {
+        double c1 = (low * 2 + high) / 3;
+        double c2 = (low + high * 2) / 3;
+
+        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
+        if (f(c1) > f(c2)) low = c1;
+        else high = c2;
+    }
+    printf("%.10lf\n",f(low));
+
     
 
     return 0;
