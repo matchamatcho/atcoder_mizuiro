@@ -27,35 +27,51 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-
-
-double f1(double x){
-    return x;
-};
+vint di={0, 1, 0, -1};
+vint dj={1, 0, -1, 0};
 
 int main()
 {
-    //a
-    double p;
-    cin>>p;
-
+    int w,h;
+    cin >> w >> h;
+    vvi ice(h, vint(w));
+    rep(i, h) {
+        rep(j, w) {
+            cin >> ice[i][j];
+        }
+    }
+    // rep(i,h){
+    //     rep(j,w){
+    //         cout<<ice[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
     
-    auto f=[&](double x)->double{
-        return x+p/pow(2.0,(double)2.0*x/3.0);
+
+    auto dfs=[&](auto self,int i,int j,vvi visited)->int{
+        visited[i][j] = 1;
+        int cnt=0;
+        rep(k,4){
+            int ni=i+di[k];
+            int nj=j+dj[k];
+            if (ni < 0 || ni >= h || nj < 0 || nj >= w) continue;
+            if (ice[ni][nj] == 0||visited[ni][nj]>0) continue;
+            cnt=max(cnt,self(self,ni,nj,visited));
+        }
+
+        return cnt+1;
 
     };
-    int cnt = 500;
-    double low = 0, high = INFL;
-    while (cnt--) {
-        double c1 = (low * 2 + high) / 3;
-        double c2 = (low + high * 2) / 3;
-
-        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
-        if (f(c1) > f(c2)) low = c1;
-        else high = c2;
+    int ans=0;
+    rep(i,h){
+        rep(j,w){
+            if (ice[i][j] == 0) continue;
+            ans=max(ans,dfs(dfs,i,j,vvi(h,vint(w,0))));
+        }
     }
-    printf("%.10lf\n",f(low));
+    cout<<ans<<endl;
 
+    
     
 
     return 0;

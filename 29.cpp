@@ -28,33 +28,43 @@ const int INF =1001001001;
 const ll INFL = 4e18;
 
 
-
-double f1(double x){
-    return x;
-};
-
 int main()
 {
-    //a
-    double p;
-    cin>>p;
-
+    int R,C;
+    cin >> R >> C;
+    // cout<<R<<' '<<C<<endl;
+    vstr c(R);
+   
+    vvi visited(R, vint(C, 0));
+    queue<pii> q;
+    int sy,sx,gy,gx;
+    cin >> sy >> sx >> gy >> gx;
+    rep(i,R) cin >> c[i];
+    // cout<<sy<<endl;
+    sy--; sx--; gy--; gx--;
+    q.push({sy,sx});
+    // cout<<111<<endl;
+    // cout<<sy<<endl;
+    visited[sy][sx] = 1;
+    // cout<<111<<endl;
+    int dx[4] = {1,0,-1,0};
+    int dy[4] = {0,1,0,-1};
     
-    auto f=[&](double x)->double{
-        return x+p/pow(2.0,(double)2.0*x/3.0);
-
-    };
-    int cnt = 500;
-    double low = 0, high = INFL;
-    while (cnt--) {
-        double c1 = (low * 2 + high) / 3;
-        double c2 = (low + high * 2) / 3;
-
-        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
-        if (f(c1) > f(c2)) low = c1;
-        else high = c2;
+    while(!q.empty()){
+        auto now = q.front();
+        q.pop();
+        int y = now.first;
+        int x = now.second;
+        rep(k,4){
+            int ny = y + dy[k];
+            int nx = x + dx[k];
+            if(ny < 0 || ny >= R || nx < 0 || nx >= C) continue;
+            if(c[ny][nx] == '#' || visited[ny][nx]) continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny,nx});
+        }
     }
-    printf("%.10lf\n",f(low));
+    cout << visited[gy][gx] - 1 << endl;
 
     
 

@@ -28,33 +28,35 @@ const int INF =1001001001;
 const ll INFL = 4e18;
 
 
-
-double f1(double x){
-    return x;
-};
-
 int main()
 {
-    //a
-    double p;
-    cin>>p;
-
-    
-    auto f=[&](double x)->double{
-        return x+p/pow(2.0,(double)2.0*x/3.0);
-
-    };
-    int cnt = 500;
-    double low = 0, high = INFL;
-    while (cnt--) {
-        double c1 = (low * 2 + high) / 3;
-        double c2 = (low + high * 2) / 3;
-
-        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
-        if (f(c1) > f(c2)) low = c1;
-        else high = c2;
+    int n,q;
+    cin >> n >> q;
+    vvi to(n);
+    rep(i,n-1){
+        int a,b;
+        cin >> a >> b;
+        a--;b--;
+        to[a].push_back(b);
+        to[b].push_back(a);
     }
-    printf("%.10lf\n",f(low));
+    vint ans(n);
+    rep(qi,q){
+        int p,x;
+        cin >> p >> x;
+        p--;
+        ans[p]+=x;
+    }
+    // printv(ans);
+    auto dfs=[&](auto self,int now,int prev)->void{
+        for(auto next : to[now]){
+            if(next==prev) continue;
+            ans[next]+=ans[now];
+            self(self,next,now);
+        }
+    };
+    dfs(dfs,0,-1);
+    printv(ans);
 
     
 

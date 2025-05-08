@@ -27,35 +27,43 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-
-
-double f1(double x){
-    return x;
-};
+vvi di={{-1,-1,0,0,1,1},{-1,-1,0,0,1,1}},dj={{0,-1,1,-1,0,-1},{0,1,-1,1,0,1}}; // 4
 
 int main()
 {
-    //a
-    double p;
-    cin>>p;
+    int w,h;
+    cin >> w >> h;
+    vvi g(h+2, vint(w+2, 0));
+    rep(i,h)rep(j,w){
+        cin>> g[i+1][j+1];
 
-    
-    auto f=[&](double x)->double{
-        return x+p/pow(2.0,(double)2.0*x/3.0);
-
-    };
-    int cnt = 500;
-    double low = 0, high = INFL;
-    while (cnt--) {
-        double c1 = (low * 2 + high) / 3;
-        double c2 = (low + high * 2) / 3;
-
-        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
-        if (f(c1) > f(c2)) low = c1;
-        else high = c2;
     }
-    printf("%.10lf\n",f(low));
-
+    vvi visited(h+2, vint(w+2, 0));
+    queue<pii> q;
+    q.push({0,0});
+    visited[0][0] = 1;
+    int ans=0;
+    while(!q.empty()){
+        auto now = q.front();
+        q.pop();
+        int i = now.first;
+        int j = now.second;
+        rep(k,6){
+            int ni = i + di[i%2][k];
+            int nj = j + dj[i%2][k];
+            if(ni < 0 || ni > h+1 || nj < 0 || nj > w+1) continue;
+            if(visited[ni][nj] == 1) continue;
+            if(g[ni][nj] == 1) {
+                ans++;
+                // continue;
+                // cout<<i<<" "<<j<<" "<<ni<<" "<<nj<<endl;
+                continue;
+            }
+            visited[ni][nj] = 1;
+            q.push({ni,nj});
+        }
+    }
+    cout<<ans<<endl;
     
 
     return 0;

@@ -28,34 +28,44 @@ const int INF =1001001001;
 const ll INFL = 4e18;
 
 
-
-double f1(double x){
-    return x;
-};
-
 int main()
 {
-    //a
-    double p;
-    cin>>p;
+    int n;
+    cin>>n;
+    vvi to(n);
 
-    
-    auto f=[&](double x)->double{
-        return x+p/pow(2.0,(double)2.0*x/3.0);
+    rep(i,n){
+        int a;
+        cin>>a;
+        int k;
+        cin>>k;
+        rep(j,k){
 
-    };
-    int cnt = 500;
-    double low = 0, high = INFL;
-    while (cnt--) {
-        double c1 = (low * 2 + high) / 3;
-        double c2 = (low + high * 2) / 3;
-
-        // もしf(c2)のほうが良い(小さい)なら、駄目な方lowを更新する
-        if (f(c1) > f(c2)) low = c1;
-        else high = c2;
+            int b;
+            cin>>b;
+            to[i].push_back(b-1);
+        }
     }
-    printf("%.10lf\n",f(low));
-
+    vint start(n),end(n);
+    auto dfs=[&](auto self,int now,int t)->int{
+        start[now]=t;
+        int nt=t;
+        
+        for(auto next:to[now]){
+            if(start[next]!=0)continue;
+            t+=self(self,next,t+1);
+        }
+        end[now]=t+1;
+        return end[now]-start[now]+1;
+    };
+    int dt=1;
+    // dfs(dfs,0,1);
+    rep(i,n){
+        if(start[i]==0)dt+=dfs(dfs,i,dt);
+    }
+    rep(i,n){
+        cout<<i+1<<' '<<start[i]<<' '<<end[i]<<endl;
+    }
     
 
     return 0;
