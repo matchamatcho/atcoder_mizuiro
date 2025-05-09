@@ -30,7 +30,40 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int N,W;
+    cin>>N>>W;
+    vint v(N),w(N);
+    rep(i,N){
+        cin>>v[i]>>w[i];
+    }
+    vvi dp(N,vint(W+1,-1));
+    rep(i,N){
+        dp[i][0]=0;
+    }
+    rep(i,W+1){
+        if(i==w[0]){
+            dp[0][i]=v[0];
+        }
+    }
+    for(int i=1;i<N;++i){
+        rep(j,W+1){
+            dp[i][j]=dp[i-1][j];
+            if(j-w[i]<0)continue;
+            if(dp[i-1][j-w[i]]!=-1)chmax(dp[i][j],dp[i-1][j-w[i]]+v[i]);
+        }
+    }
+    int ans=0;
+    rep(i,W+1){
+        chmax(ans,dp[N-1][i]);
+
+    }
+    // rep(i,N){
+    //     rep(j,W+1){
+    //         cout<<dp[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+    cout<<ans<<endl;
     
 
     return 0;
