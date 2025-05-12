@@ -40,8 +40,10 @@ int main()
         vvi dp(256,vint(256,INF));
         rep(i,256)dp[i][i]=0;
         rep(i,N){//de-ta
-            vvi old=dp;
+            vvi old(256,vint(256,INF));
+            swap(dp,old);
             rep(j,256){//shokiti
+                if(j!=128)continue;
                 rep(k,256){//imanoatai
                     if(old[j][k]==INF)continue;
                     rep(l,M){
@@ -49,17 +51,21 @@ int main()
                         if(next>255)next=255;
                         if(next<0)next=0;
                         chmin(dp[j][next],old[j][k]+(x[i]-next)*(x[i]-next));
+                        if(dp[j][next]==0&&0){cout <<i<<" "<< j << " " << k << " " <<l<<" "<< next << " " << dp[j][next] << endl;
+                        return 0;}
                     }
                 }
+                // printv(dp[j]);
             }
         }
+        // break;
         int ans=INF;
-    rep(i,256){
-        rep(j,256){
-            chmin(ans,dp[i][j]);
+        rep(i,256){
+            rep(j,256){
+                chmin(ans,dp[i][j]);
+            }
         }
-    }
-    cout << ans << endl;
+        cout << ans << endl;
 
     }
     
