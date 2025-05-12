@@ -30,28 +30,16 @@ const ll INFL = 4e18;
 
 int main()
 {
-    vint table;
-    for(int i=1;i*(1+i)*(2+i)/6<1e6;++i){
-        table.push_back(i*(1+i)*(2+i)/6);
+    vector<vector<double>> x={{1,2},{2,1},{0,-1},{-1,1},{2,3},{3,2}};
+    vector<double>m1={2,1},m2={1,1},m11={0,0},m22={0,0};
+    
+    rep(i,6){
+        double a=(x[i][0]-m1[0])*(x[i][0]-m1[0])+(x[i][1]-m1[1])*(x[i][1]-m1[1]);
+        double b=(x[i][0]-m2[0])*(x[i][0]-m2[0])+(x[i][1]-m2[1])*(x[i][1]-m2[1]);
+
     }
-    vint dp(1e6+1,INF),dp2(1e6+1,INF);
-    rep(i,1e6)dp[i]=i;
-    rep(i,1e6)dp2[i]=i;
-    for(int i = 1; i*(1+i)*(2+i)/6<1e6;++i){
-        vint old=dp;
-        for(int j=1;j<1e6;++j){
-            if(j-table[i]>=0){
-                dp[j]=min(dp[j],dp[j-table[i]]+1);
-                if(table[i]&1)dp2[j]=min(dp2[j],dp2[j-table[i]]+1);
-            }
-        }
-    }
-    while(1){
-        int N;
-        cin >> N;
-        if(N==0)break;
-        cout << dp[N] << " " << dp2[N] << endl;
-    }
+    
+    
 
     return 0;
 }

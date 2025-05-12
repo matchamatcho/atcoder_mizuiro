@@ -30,28 +30,40 @@ const ll INFL = 4e18;
 
 int main()
 {
-    vint table;
-    for(int i=1;i*(1+i)*(2+i)/6<1e6;++i){
-        table.push_back(i*(1+i)*(2+i)/6);
-    }
-    vint dp(1e6+1,INF),dp2(1e6+1,INF);
-    rep(i,1e6)dp[i]=i;
-    rep(i,1e6)dp2[i]=i;
-    for(int i = 1; i*(1+i)*(2+i)/6<1e6;++i){
-        vint old=dp;
-        for(int j=1;j<1e6;++j){
-            if(j-table[i]>=0){
-                dp[j]=min(dp[j],dp[j-table[i]]+1);
-                if(table[i]&1)dp2[j]=min(dp2[j],dp2[j-table[i]]+1);
+    while(1){
+        int N,M;
+        cin >> N >> M;
+        if(N==0&&M==0)break;
+        vint C(M),x(N);
+        rep(i,M) cin >> C[i];
+        rep(i,N) cin >> x[i];
+        vvi dp(256,vint(256,INF));
+        rep(i,256)dp[i][i]=0;
+        rep(i,N){//de-ta
+            vvi old=dp;
+            rep(j,256){//shokiti
+                rep(k,256){//imanoatai
+                    if(old[j][k]==INF)continue;
+                    rep(l,M){
+                        int next=k+C[l];
+                        if(next>255)next=255;
+                        if(next<0)next=0;
+                        chmin(dp[j][next],old[j][k]+(x[i]-next)*(x[i]-next));
+                    }
+                }
             }
         }
+        int ans=INF;
+    rep(i,256){
+        rep(j,256){
+            chmin(ans,dp[i][j]);
+        }
     }
-    while(1){
-        int N;
-        cin >> N;
-        if(N==0)break;
-        cout << dp[N] << " " << dp2[N] << endl;
+    cout << ans << endl;
+
     }
+    
+    
 
     return 0;
 }

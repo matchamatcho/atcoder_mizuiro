@@ -38,11 +38,11 @@ int main()
     rep(i,1e6)dp[i]=i;
     rep(i,1e6)dp2[i]=i;
     for(int i = 1; i*(1+i)*(2+i)/6<1e6;++i){
-        vint old=dp;
+        vint old=dp,old2=dp2;
         for(int j=1;j<1e6;++j){
             if(j-table[i]>=0){
-                dp[j]=min(dp[j],dp[j-table[i]]+1);
-                if(table[i]&1)dp2[j]=min(dp2[j],dp2[j-table[i]]+1);
+                dp[j]=min(old[j],dp[j-table[i]]+1);
+                if(table[i]&1)dp2[j]=min(old2[j],dp2[j-table[i]]+1);
             }
         }
     }
