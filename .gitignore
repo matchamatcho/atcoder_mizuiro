@@ -37,3 +37,9 @@ Thumbs.db
 *.spec
 
 .env
+
+i.txt
+
+a.out
+
+tmp.cpp
