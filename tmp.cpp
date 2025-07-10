@@ -30,14 +30,7 @@ const ll INFL = 4e18;
 
 int main()
 {
-    vector<vector<double>> x={{1,2},{2,1},{0,-1},{-1,1},{2,3},{3,2}};
-    vector<double>m1={2,1},m2={1,1},m11={0,0},m22={0,0};
-    
-    rep(i,6){
-        double a=(x[i][0]-m1[0])*(x[i][0]-m1[0])+(x[i][1]-m1[1])*(x[i][1]-m1[1]);
-        double b=(x[i][0]-m2[0])*(x[i][0]-m2[0])+(x[i][1]-m2[1])*(x[i][1]-m2[1]);
-
-    }
+    cout<<__cplusplus<<endl;
     
     
 
