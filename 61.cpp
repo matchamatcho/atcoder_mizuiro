@@ -27,7 +27,6 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-
 bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 {
 	const size_t v = distances.size();
@@ -57,32 +56,31 @@ bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 
 	return false;
 }
-
 int main()
 {
-    int v,e;
-    cin >> v >> e;
-    vvll dist(v, vll(v, INFL));
-    rep(i,v) dist[i][i] = 0;
-    rep(i,e){
-        int s,t;
-
-        ll d;
-        cin >> s >> t >> d;
-        dist[s][t] = d;
+    int n,m;
+    cin>>n>>m;
+    vvll dist(n,vll(n,INFL));
+    rep(i,n)dist[i][i]=0;
+    rep(i,m){
+        int a,b;
+        ll t;
+        cin>>a>>b>>t;
+        a--;b--;
+        dist[a][b]=t;
+        dist[b][a]=t;
     }
-    bool f = FloydWarshall(dist);
-    if(f)cout<<"NEGATIVE CYCLE"<<endl;
-    else{
-        rep(i,v){
-            rep(j,v){
-                if(j>0)cout<<" ";
-                if(dist[i][j]==INFL)cout<<"INF";
-                else cout<<dist[i][j]<<"";
-            }
-            cout<<endl;
+    FloydWarshall(dist);
+    ll mx=INFL;
+    rep(i,n){
+        ll mxnow=0;
+        rep(j,n){
+            mxnow=max(mxnow,dist[i][j]);
         }
+        mx=min(mx,mxnow);
     }
+    cout<<mx<<endl;
+    
     
 
     return 0;

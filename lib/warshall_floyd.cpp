@@ -6,6 +6,7 @@ constexpr long long INFL = (1LL << 60);
 
 // ワーシャルフロイド法 (1.1 基本実装)
 // 負閉路が存在する場合 true を返す
+//distances[i][j] := 頂点 i から頂点 j へのコスト。i==j のときは 0、辺が存在しないときは INFL とする.
 bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 {
 	const size_t v = distances.size();

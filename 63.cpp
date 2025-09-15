@@ -1,7 +1,9 @@
+//出来てない
+
 #include <bits/stdc++.h>
-// #include <atcoder/all>
+#include <atcoder/all>
 using namespace std;
-// using namespace atcoder;
+using namespace atcoder;
 // using mint = modint998244353;
 using ll = long long;
 using ull = unsigned long long;
@@ -26,7 +28,6 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const int INF =1001001001;
 const ll INFL = 4e18;
-
 
 bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 {
@@ -60,30 +61,63 @@ bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 
 int main()
 {
-    int v,e;
-    cin >> v >> e;
-    vvll dist(v, vll(v, INFL));
-    rep(i,v) dist[i][i] = 0;
-    rep(i,e){
-        int s,t;
-
-        ll d;
-        cin >> s >> t >> d;
-        dist[s][t] = d;
+    int n;
+    cin>>n;
+    vvll dist(n,vll(n,INFL));
+    rep(i,n)rep(j,n){
+        cin>>dist[i][j];
     }
-    bool f = FloydWarshall(dist);
-    if(f)cout<<"NEGATIVE CYCLE"<<endl;
-    else{
-        rep(i,v){
-            rep(j,v){
-                if(j>0)cout<<" ";
-                if(dist[i][j]==INFL)cout<<"INF";
-                else cout<<dist[i][j]<<"";
-            }
-            cout<<endl;
-        }
+    vvll tmp=dist;
+    FloydWarshall(dist);
+    if(tmp!=dist){
+        cout<<-1<<endl;
+        return 0;
     }
     
+    priority_queue<pair<ll,pii>,vector<pair<ll,pii>>,greater<pair<ll,pii>>> pq;
+    dsu uf(n);
+    rep(i,n)rep(j,n){
+        if(i<j)pq.push({dist[i][j],{i,j}});
+    }
+    ll ans=0;
+    vvll newdist(n,vll(n,INFL));
+    rep(i,n)newdist[i][i]=0;
+    rep(i,n)rep(j,i){
+        ans+=dist[i][j];
+    }
+    set <pii>st;
+    rep(i,n)rep(j,i){
+        rep(k,n){
+            if(dist[i][j]==dist[i][k]+dist[k][j]){
+                if(st.count({i,j})>0)continue;
+                ans-=dist[i][j];
+            st.insert({i,j});
+            }
+        }
+    }
+    while(0){
+        auto p=pq.top();pq.pop();
+        ll c=p.first;
+        int u=p.second.first;
+        int v=p.second.second;
+        if(!uf.same(u,v)){
+            uf.merge(u,v);
+            bool changed=false;
+            changed=chmin(newdist[u][v],c);
+            
+            rep(i,n){
+                rep(j,n){
+                    changed=chmin(newdist[i][j],newdist[i][u]+newdist[u][v]+newdist[v][j]);
+                    changed=chmin(newdist[i][j],newdist[i][v]+newdist[v][u]+newdist[u][j]);
+                }
+                if(changed)ans+=c;
+            }
+        }
+        
+        // ans+=c;
+    }
+    cout<<ans<<endl;
+
 
     return 0;
 }

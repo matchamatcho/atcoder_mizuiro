@@ -27,7 +27,6 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-
 bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 {
 	const size_t v = distances.size();
@@ -57,32 +56,19 @@ bool FloydWarshall(std::vector<std::vector<long long>>& distances)
 
 	return false;
 }
-
 int main()
 {
-    int v,e;
-    cin >> v >> e;
-    vvll dist(v, vll(v, INFL));
-    rep(i,v) dist[i][i] = 0;
-    rep(i,e){
-        int s,t;
-
-        ll d;
-        cin >> s >> t >> d;
-        dist[s][t] = d;
+    int h,w;
+    cin>>h>>w;
+    vvll c(10,vll(10));
+    rep(i,10)rep(j,10)cin>>c[i][j];
+    FloydWarshall(c);
+    ll ans=0;
+    rep(i,h)rep(j,w){
+        int a;cin>>a;
+        if(a!=-1)ans+=c[a][1];
     }
-    bool f = FloydWarshall(dist);
-    if(f)cout<<"NEGATIVE CYCLE"<<endl;
-    else{
-        rep(i,v){
-            rep(j,v){
-                if(j>0)cout<<" ";
-                if(dist[i][j]==INFL)cout<<"INF";
-                else cout<<dist[i][j]<<"";
-            }
-            cout<<endl;
-        }
-    }
+    cout<<ans<<endl;
     
 
     return 0;
