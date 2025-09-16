@@ -26,40 +26,50 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const int INF =1001001001;
 const ll INFL = 4e18;
-
-vector < bool > isprime;
-//返り値は素数のリスト。
-vector < ll > Era(int n) {
-	isprime.resize(n, true);
-	vector < ll > res;
-	isprime[0] = false;
-	isprime[1] = false;
-	for(ll i = 2; i < n; ++i) isprime[i] = true;
-	for(ll i = 2; i < n; ++i) {
-		if(isprime[i]) {
-			res.push_back(i);
-			for(ll j = i * 2; j < n; j += i) isprime[j] = false;
-		}
+// a^n mod を計算する
+long long modpow(long long a, long long n, long long mod) {
+	long long res = 1;
+	while (n > 0) {
+		if (n & 1) res = res * a % mod;
+		a = a * a % mod;
+		n >>= 1;
 	}
 	return res;
 }
+ll mod=1e9+7;
 int main()
 {
-    Era(1e6);
-    vint s(1e5+1);
-    for(int i=1;i<1e5+1;i+=2){
-        if(isprime[i]&&isprime[(i+1)/2])s[i]=1;
+    ll n,q;
+    cin>>n>>q;
+    vll a(n),c(q);
+    rep(i,n)cin>>a[i];
+    rep(i,q)cin>>c[i];
+    vll sa;
+    sa.push_back(0);
+    rep(i,n-1){
+        sa.push_back(modpow(a[i],a[i+1],mod));
 
     }
-    rep(i,1e5)s[i+1]+=s[i];
-    int q;
-    cin>>q;
-    rep(i,q){
-        int l,r;
-        cin>>l>>r;
-        cout<<s[r]-s[l-1]<<endl;
-    }
+    // printv(sa)
 
+    rep(i,n-1){
+        sa[i+1]=(sa[i+1]+sa[i])%mod;
+    }
+    // printv(sa)
+    ll ans=0;
+    ans=ans+sa[c[0]-1]-sa[0];
+    // cout<<ans<<endl;
+    rep(i,q-1){
+        ans=ans+sa[max(c[i+1],c[i])-1]-sa[min(c[i],c[i+1])-1];
+        ans=(ans+mod)%mod;
+        // cout<<ans<<endl;
+
+    }
+    
+    ans=(ans+mod)%mod;
+    ans=ans+sa[c[q-1]-1]-sa[0];
+    ans=(ans+mod)%mod;
+    cout<<ans<<endl;
     
     
 

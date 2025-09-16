@@ -18,8 +18,11 @@ long long modinv(long long a, long long mod) {
 	return modpow(a, mod - 2, mod);
 }
 
+vector<long long> fac, finv, inv;
 
 // テーブルを作る前処理
+//fac:階乗, finv:階乗の逆元, inv:逆元
+//MOD:法, MAX:テーブルの大きさ
 void COMinit(vector<long long> &fac,vector<long long> &finv,vector<long long> &inv,long long MOD,long long MAX) {
     // const int MOD = mint::mod();
     // long long MAX=fac.size();
@@ -36,6 +39,8 @@ void COMinit(vector<long long> &fac,vector<long long> &finv,vector<long long> &i
     }
 }
 // 二項係数計算
+// nCk mod を計算する
+// fac:階乗, finv:階乗の逆元, n: n, k: k, MOD:法
 long long COM(vector<long long> fac,vector<long long> finv,long long n, long long k,long long MOD){
     if (n < k) return 0;
     if (n < 0 || k < 0) return 0;
