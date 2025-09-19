@@ -27,40 +27,53 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-vector < bool > isprime;
-//返り値は素数のリスト。
-vector < ll > Era(int n) {
-	isprime.resize(n, true);
-	vector < ll > res;
-	isprime[0] = false;
-	isprime[1] = false;
-	for(ll i = 2; i < n; ++i) isprime[i] = true;
-	for(ll i = 2; i < n; ++i) {
-		if(isprime[i]) {
-			res.push_back(i);
-			for(ll j = i * 2; j < n; j += i) isprime[j] = false;
-		}
-	}
-	return res;
-}
+
 int main()
 {
-    Era(1e6);
-    vint s(1e5+1);
-    for(int i=1;i<1e5+1;i+=2){
-        if(isprime[i]&&isprime[(i+1)/2])s[i]=1;
+    int n;
+    cin>>n;
+
+    vpii a;
+    auto add=[&](int c,int num){
+        if(a.size()==0){
+            a.push_back({c,num});
+            return;
+        }
+        if(a.back().first==c){
+            a.back().second+=num;
+        }else{
+            a.push_back({c,num});
+        }
+    };
+    auto add2=[&](int c,int num){
+        if(a.size()==0){
+            a.push_back({c,num});
+            return;
+        }
+        if(a.back().first==c){
+            a.back().second+=num;
+        }else{
+            int cnt=a.back().second;
+            a.pop_back();
+            add(c,cnt+num);
+
+        }
+    };
+    rep(i,n){
+        int c;
+        cin>>c;
+        if(i%2==0){
+            add(c,1);
+        } else{
+            add2(c,1);
+        }
 
     }
-    rep(i,1e5)s[i+1]+=s[i];
-    int q;
-    cin>>q;
-    rep(i,q){
-        int l,r;
-        cin>>l>>r;
-        cout<<s[r]-s[l-1]<<endl;
+    int ans=0;
+    for(auto p:a){
+        if(p.first==0) ans+=p.second;
     }
-
-    
+    cout<<ans<<endl;
     
 
     return 0;

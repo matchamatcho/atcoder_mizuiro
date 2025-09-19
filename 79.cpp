@@ -1,3 +1,4 @@
+//出来てない
 #include <bits/stdc++.h>
 // #include <atcoder/all>
 using namespace std;
@@ -27,39 +28,33 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-vector < bool > isprime;
-//返り値は素数のリスト。
-vector < ll > Era(int n) {
-	isprime.resize(n, true);
-	vector < ll > res;
-	isprime[0] = false;
-	isprime[1] = false;
-	for(ll i = 2; i < n; ++i) isprime[i] = true;
-	for(ll i = 2; i < n; ++i) {
-		if(isprime[i]) {
-			res.push_back(i);
-			for(ll j = i * 2; j < n; j += i) isprime[j] = false;
-		}
-	}
-	return res;
-}
+
 int main()
 {
-    Era(1e6);
-    vint s(1e5+1);
-    for(int i=1;i<1e5+1;i+=2){
-        if(isprime[i]&&isprime[(i+1)/2])s[i]=1;
+    int n,m,Q;
+    cin>>n>>m>>Q;
+    vll l(m),r(m);
+    rep(i,m)cin>>l[i]>>r[i];
+    vll p(Q),q(Q);
+    rep(i,Q)cin>>p[i]>>q[i];
+    vll s(n+1);
+    vll st(n+1),ed(n+1);
 
+    rep(i,m){
+        for(int j=l[i];j<=r[i];j++)s[j]++;
+        st[l[i]]++;
+        ed[r[i]]++;
     }
-    rep(i,1e5)s[i+1]+=s[i];
-    int q;
-    cin>>q;
-    rep(i,q){
-        int l,r;
-        cin>>l>>r;
-        cout<<s[r]-s[l-1]<<endl;
+    rep(i,n) st[i+1] += st[i];
+    rep(i,n) ed[i+1] += ed[i];
+    // printv(s);
+    rep(i,n) s[i+1] += s[i];
+    // printv(s);
+    printv(st);
+    printv(ed);
+    rep(i,Q){
+        
     }
-
     
     
 

@@ -27,40 +27,33 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-vector < bool > isprime;
-//返り値は素数のリスト。
-vector < ll > Era(int n) {
-	isprime.resize(n, true);
-	vector < ll > res;
-	isprime[0] = false;
-	isprime[1] = false;
-	for(ll i = 2; i < n; ++i) isprime[i] = true;
-	for(ll i = 2; i < n; ++i) {
-		if(isprime[i]) {
-			res.push_back(i);
-			for(ll j = i * 2; j < n; j += i) isprime[j] = false;
-		}
-	}
-	return res;
-}
+
 int main()
 {
-    Era(1e6);
-    vint s(1e5+1);
-    for(int i=1;i<1e5+1;i+=2){
-        if(isprime[i]&&isprime[(i+1)/2])s[i]=1;
+    ll n,m;
+    cin>>n>>m;
+    vll p(m);
+    rep(i,m)cin>>p[i];
+    vll a(n-1),b(n-1),c(n-1);
+    rep(i,n-1)cin>>a[i]>>b[i]>>c[i];
+    vll num(n);
+    rep(i,m-1){
+        num[min(p[i],p[i+1])-1]++;
+        num[max(p[i],p[i+1])-1]--;
 
     }
-    rep(i,1e5)s[i+1]+=s[i];
-    int q;
-    cin>>q;
-    rep(i,q){
-        int l,r;
-        cin>>l>>r;
-        cout<<s[r]-s[l-1]<<endl;
-    }
 
-    
+    rep(i,n-1)num[i+1]+=num[i];
+    ll ans=0;
+    // printv(num);
+    rep(i,n-1){
+        ll useA=num[i]*a[i];
+        ll useB=num[i]*b[i]+c[i];
+        ans+=min(useA,useB);
+        // cout<<useA<<" "<<useB<<endl;
+
+    }
+    cout<<ans<<endl;
     
 
     return 0;

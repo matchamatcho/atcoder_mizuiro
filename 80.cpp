@@ -27,41 +27,25 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
-vector < bool > isprime;
-//返り値は素数のリスト。
-vector < ll > Era(int n) {
-	isprime.resize(n, true);
-	vector < ll > res;
-	isprime[0] = false;
-	isprime[1] = false;
-	for(ll i = 2; i < n; ++i) isprime[i] = true;
-	for(ll i = 2; i < n; ++i) {
-		if(isprime[i]) {
-			res.push_back(i);
-			for(ll j = i * 2; j < n; j += i) isprime[j] = false;
-		}
-	}
-	return res;
-}
+
 int main()
 {
-    Era(1e6);
-    vint s(1e5+1);
-    for(int i=1;i<1e5+1;i+=2){
-        if(isprime[i]&&isprime[(i+1)/2])s[i]=1;
-
-    }
-    rep(i,1e5)s[i+1]+=s[i];
-    int q;
-    cin>>q;
-    rep(i,q){
-        int l,r;
-        cin>>l>>r;
-        cout<<s[r]-s[l-1]<<endl;
-    }
-
+    int h ,w;
+    ll k,v;
+    cin>>h>>w>>k>>v;
+    vvll a(h+1,vll(w+1));
+    rep(i,h)rep(j,w)cin>>a[i+1][j+1];
+    rep(i,h)rep(j,w+1)a[i+1][j]+=a[i][j];
+    rep(i,h+1)rep(j,w)a[i][j+1]+=a[i][j];
     
-    
+    ll ans=0;
+    rep(i,h)rep(j,w)Rep(ii,i+1,h+1)Rep(jj,j+1,w+1){
+        ll sum=a[ii][jj]-a[ii][j]-a[i][jj]+a[i][j];
+        sum+=(ll(ii-i)*(jj-j))*k;
 
+        if(sum<=v)chmax(ans,ll(ii-i)*ll(jj-j));
+    }
+    cout<<ans<<endl;
+    
     return 0;
 }
