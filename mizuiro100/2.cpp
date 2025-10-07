@@ -21,19 +21,29 @@ using vpll = vector<pll>;
 #define Rep(i,a,b) for(int i=a;i<b;i++)
 #define ALL(x) (x).begin(),(x).end()
 #define printv(x); for(auto now : x) cout << now << " "; cout << endl;
-#define yes(q) cout << ((q) ? "Yes" : "No") << endl;
+#define Yes(q) cout << ((q) ? "Yes" : "No") << endl;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
-const int INF =1001001001;
+const int INF=1001001001;
 const ll INFL = 4e18;
 
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
-    
+    int n;
+    cin>>n;
+    int ans=0;
+    for(int i=1;i<=n;i=i+2){
+        int cnt=0;
+        for(int j=1;j<=i;j++){
+            if(i%j==0)cnt++;
+
+        }
+        if(cnt==8)ans++;
+
+    }
+    cout<<ans<<endl;
+
 
     return 0;
 }

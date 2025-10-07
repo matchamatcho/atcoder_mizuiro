@@ -30,9 +30,29 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int N,M;
+    cin >> N >> M;
+    vint D(N),C(M);
+    rep(i,N) cin >> D[i];
+    rep(i,M) cin >> C[i];
+    vvi dp(M+1,vint(N+1,INF));
+    rep(i,M+1)dp[i][0] = 0;
+    rep(i,M) {
+        rep(j,N) {
+            if(dp[i][j]!= INF) {
+                dp[i+1][j+1]=dp[i][j]+D[j]*C[i];
+            }
+            if(dp[i][j+1]!= INF) {
+                chmin(dp[i+1][j+1],dp[i][j+1]);
+            }
+        }
+    }
+    int ans = INF;
+    rep(i,M+1) {
+        chmin(ans,dp[i][N]);
+    }
+    cout<<dp[M][N]<<endl;
+
     
 
     return 0;

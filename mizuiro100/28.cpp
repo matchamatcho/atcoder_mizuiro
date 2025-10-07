@@ -30,9 +30,41 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin >> n;
+    vvi to(n);
+    rep(i, n) {
+        int y;
+        cin>>y;
+        int k;
+        cin >> k;
+        rep(j, k) {
+            int v;
+            cin>>v;
+            v--;
+            to[i].push_back(v);
+        }
+    }
+    vint visited(n);
+    queue<int>q;
+    q.push(0);
+    visited[0]=1;
+    while(!q.empty()){
+        int now=q.front();
+        q.pop();
+        for(auto next:to[now]){
+            if(visited[next]==0){
+                visited[next]=visited[now]+1;
+                q.push(next);
+            }
+        }
+    }
+    rep(i,n){
+        if(visited[i]==0){
+            cout<<i+1<<' '<<-1<<endl;
+        }
+        else cout<<i+1<<' '<<visited[i]-1<<endl;
+    }
     
 
     return 0;

@@ -30,9 +30,50 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+
+    vpii a;
+    auto add=[&](int c,int num){
+        if(a.size()==0){
+            a.push_back({c,num});
+            return;
+        }
+        if(a.back().first==c){
+            a.back().second+=num;
+        }else{
+            a.push_back({c,num});
+        }
+    };
+    auto add2=[&](int c,int num){
+        if(a.size()==0){
+            a.push_back({c,num});
+            return;
+        }
+        if(a.back().first==c){
+            a.back().second+=num;
+        }else{
+            int cnt=a.back().second;
+            a.pop_back();
+            add(c,cnt+num);
+
+        }
+    };
+    rep(i,n){
+        int c;
+        cin>>c;
+        if(i%2==0){
+            add(c,1);
+        } else{
+            add2(c,1);
+        }
+
+    }
+    int ans=0;
+    for(auto p:a){
+        if(p.first==0) ans+=p.second;
+    }
+    cout<<ans<<endl;
     
 
     return 0;

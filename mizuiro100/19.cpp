@@ -30,9 +30,24 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int D;
+    cin>>D;
+    int n,m;
+    cin>>n>>m;
+    vint d(n);
+    rep(i,n-1)cin>>d[i+1];
+    d.push_back(D);
+    sort(d.begin(), d.end());
+    vint k(m);
+    rep(i,m)cin>>k[i];
+    ll ans=0;
+    rep(mi,m){
+        int pos=upper_bound(d.begin(), d.end(),k[mi])-d.begin();
+        ans+=min(k[mi]-d[pos-1],d[pos]-k[mi]);
+
+
+    }
+    cout<<ans<<endl;
     
 
     return 0;

@@ -30,9 +30,40 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n,m;
+    cin>>n>>m;
+    vint k(m);
+    vvi s(m);
+    rep(i,m){
+        cin>>k[i];
+        rep(j,k[i]){
+            int x;
+            cin>>x;
+            x--;
+            s[i].push_back(x);
+
+            
+        }
+
+    }
+    vint p(m);
+    rep(i,m)cin>>p[i];
+    int ans=0;
+    for(int bit=0;bit<(1<<n);++bit){
+        bool ok=true;
+        for(int mi=0;mi<m;++mi){
+            int cnt=0;
+            for(int ki=0;ki<k[mi];++ki){
+                if(bit&(1<<s[mi][ki])){
+                    cnt=(cnt+1)%2;
+                }
+
+            }
+            if(cnt!=p[mi])ok=false;
+        }
+        if(ok)ans++;
+    }
+    cout<<ans<<endl;
     
 
     return 0;

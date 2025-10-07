@@ -30,9 +30,27 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    string s;
+    cin>>n>>s;
+    set<string>ans;
+
+    vector<set<char>> a(n,set<char>());
+    rep(i,n-1){
+        a[n-2-i].insert(s[n-1-i]);
+        for(auto x:a[n-1-i])a[n-2-i].insert(x);
+    }
+    for(int i=0;i<n-2;++i){
+        for(int j=i+1;j<n-1;++j){
+            for(auto x:a[j]){
+                ans.insert(s.substr(i,1)+s[j]+x);
+                // cout<<(s.substr(i,1))+s[j]+x<<endl;
+            }
+
+        }
+    }
+    cout<<ans.size()<<endl;
+    // printv(ans)
     
 
     return 0;

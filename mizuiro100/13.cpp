@@ -30,9 +30,33 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int r,c;
+    cin>>r>>c;
+    vvi a(r,vint(c));
+    rep(i,r)rep(j,c)cin>>a[i][j];
+    int ans=0;
+    for(int bit=0;bit<(1<<r);++bit){
+        vvi now=a;
+        rep(i,r){
+            if(bit&(1<<i)){
+                rep(j,c){
+                    now[i][j]=1-a[i][j];
+                }
+
+            }
+        }
+        int cnt=0;
+        rep(j,c){
+            int cnt2=0;
+            rep(i,r){
+                if(now[i][j]==1)cnt2++;
+            }
+            cnt+=max(cnt2,r-cnt2);
+        }
+        ans=max(ans,cnt);
+    }
+    cout<<ans<<endl;
+
     
 
     return 0;

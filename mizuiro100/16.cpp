@@ -30,10 +30,26 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
-    
+    //aaa
+    int n;
+    cin>>n;
+    vint p(n),q(n);
+    rep(i,n){
+        cin>>p[i];
+
+    }
+    rep(i,n)cin>>q[i];
+    vint r(n);
+    rep(i,n)r[i]=i+1;
+    int a=0,b=0,i=0;
+    do{
+        if(p==r)a=i;
+        if(q==r)b=i;
+        i++;
+        
+
+    }while(next_permutation(r.begin(), r.end()));
+    cout<<abs(a-b)<<endl;
 
     return 0;
 }

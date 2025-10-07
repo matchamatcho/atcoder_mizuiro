@@ -1,3 +1,5 @@
+//まだ
+
 #include <bits/stdc++.h>
 // #include <atcoder/all>
 using namespace std;
@@ -30,9 +32,13 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    ll m;
+    cin>>m;
+    vll d(m),c(m);
+    rep(i,m)cin>>d[i]>>c[i];
+
     
+
     
 
     return 0;

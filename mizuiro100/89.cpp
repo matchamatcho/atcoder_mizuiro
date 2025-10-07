@@ -30,10 +30,40 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n;
+    cin>>n;
     
-    
+    int prev=-1;
+    vint ans={};
+    int cnt=0;
+    rep(i,n){
+        int c;
+        cin>>c;
+        if(c==prev){
+            ans.push_back(cnt);
+            cnt=1;
+            prev=c;
+        }
+        else{
+            cnt++;
+            prev=c;
+        }
 
+    }
+    if(cnt>0)ans.push_back(cnt);
+    int res=0;
+    if(ans.size()<3){
+
+        for(auto v:ans)res+=v;
+    }
+    else{
+        for(int i=0;i<ans.size()-2;++i){
+            res=max(res,ans[i]+ans[i+1]+ans[i+2]);
+        }
+    }
+    // printv(ans);
+    cout<<res<<endl;
+    // printv(ans);
     return 0;
 }
+

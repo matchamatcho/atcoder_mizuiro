@@ -1,3 +1,4 @@
+//出来てない
 #include <bits/stdc++.h>
 // #include <atcoder/all>
 using namespace std;
@@ -30,8 +31,12 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    long double a,b,x;
+    cin>>a>>b>>x;
+    double rad=atan2(b,a);
+    long double v=sqrtl(a*a+b*b)*a*sinl(rad)*a/2;
+    cout<<fixed<<setprecision(10)<<rad*180.0L/M_PIl<<endl;
+    cout<<fixed<<setprecision(10)<<v<<endl;
     
     
 

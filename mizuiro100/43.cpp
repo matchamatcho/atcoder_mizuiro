@@ -30,10 +30,41 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
-    
-
+    int N;
+    cin >> N;
+    vstr S(5);
+    rep(i, 5) cin >> S[i];
+    vvi dp(N,vint(3,INF));
+    //{RBW012}
+    dp[0][1]=dp[0][2]=dp[0][0]=0;
+    rep(i,5){
+        if(S[i][0]!='R')dp[0][0]++;
+    }
+    rep(i,5){
+        if(S[i][0]!='B')dp[0][1]++;
+    }
+    rep(i,5){
+        if(S[i][0]!='W')dp[0][2]++;
+    }
+    vvi cnt(N,vint(3,0));
+    rep(i,5)rep(j,N){
+        if(S[i][j]=='R')cnt[j][0]++;
+        if(S[i][j]=='B')cnt[j][1]++;
+        if(S[i][j]=='W')cnt[j][2]++;
+    }
+    Rep(i,1,N){
+        rep(j,3){
+            rep(k,3){
+                if(j==k)continue;
+                dp[i][j]=min(dp[i-1][k]+5-cnt[i][j],dp[i][j]);
+            }
+        }
+      
+    }
+    int ans=INF;
+    rep(i,3){
+        ans=min(ans,dp[N-1][i]);
+    }
+    cout << ans << endl;
     return 0;
 }

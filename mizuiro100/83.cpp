@@ -30,9 +30,30 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    ll n,m;
+    cin>>n>>m;
+    vll p(m);
+    rep(i,m)cin>>p[i];
+    vll a(n-1),b(n-1),c(n-1);
+    rep(i,n-1)cin>>a[i]>>b[i]>>c[i];
+    vll num(n);
+    rep(i,m-1){
+        num[min(p[i],p[i+1])-1]++;
+        num[max(p[i],p[i+1])-1]--;
+
+    }
+
+    rep(i,n-1)num[i+1]+=num[i];
+    ll ans=0;
+    // printv(num);
+    rep(i,n-1){
+        ll useA=num[i]*a[i];
+        ll useB=num[i]*b[i]+c[i];
+        ans+=min(useA,useB);
+        // cout<<useA<<" "<<useB<<endl;
+
+    }
+    cout<<ans<<endl;
     
 
     return 0;

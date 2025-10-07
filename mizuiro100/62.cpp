@@ -27,12 +27,48 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
+bool FloydWarshall(std::vector<std::vector<long long>>& distances)
+{
+	const size_t v = distances.size();
 
+	for (size_t i = 0; i < v; ++i)
+	{
+		for (size_t from = 0; from < v; ++from)
+		{
+			for (size_t to = 0; to < v; ++to)
+			{
+				if ((distances[from][i] < INFL) && (distances[i][to] < INFL))
+				{
+					distances[from][to] = std::min(distances[from][to], (distances[from][i] + distances[i][to]));
+				}
+			}
+		}
+	}
+
+	for (size_t i = 0; i < v; ++i)
+	{
+		// 負閉路が含まれている場合, distances[i][i] が負になるような i が存在する
+		if (distances[i][i] < 0)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int h,w;
+    cin>>h>>w;
+    vvll c(10,vll(10));
+    rep(i,10)rep(j,10)cin>>c[i][j];
+    FloydWarshall(c);
+    ll ans=0;
+    rep(i,h)rep(j,w){
+        int a;cin>>a;
+        if(a!=-1)ans+=c[a][1];
+    }
+    cout<<ans<<endl;
     
 
     return 0;

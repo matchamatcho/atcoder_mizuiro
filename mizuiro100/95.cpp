@@ -30,9 +30,14 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    ll a,b,k;
+    cin>>a>>b>>k;
+    if(a>=k){
+        cout<<a-k<<" "<<b<<endl;
+        return 0;
+    }
+    k-=a;
+    cout<<0<<" "<<max(0LL,b-k)<<endl;
     
 
     return 0;

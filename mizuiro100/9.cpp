@@ -30,9 +30,44 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int m;
+    cin>>m;
+    vint mx(m),my(m);
+    rep(i,m)cin>>mx[i]>>my[i];
+    int n;
+    cin>>n;
+    set<pii> nxy;
+    rep(i,n){
+        int x,y;
+        cin>>x>>y;
+        nxy.insert(mkpr(x,y));
+    } 
+    for(auto [x,y]:nxy){
+        int dx=x-mx[0],dy=y-my[0];
+        // cout<<dx<<' '<<dy<<endl;
+        bool ok=true;
+        rep(i,m-1){
+            // cout<<x<<' '<<y<<endl;
+            // cout<<mx[i+1]+dx<<' '<<my[i+1]+dy<<endl;
+
+
+            if(nxy.count(mkpr(mx[i+1]+dx,my[i+1]+dy))==0){
+                if(dx==2&&dy==-3){
+                // cout<<mx[i+1]<<' '<<my[i+1]<<endl;
+            }
+                // cout<<mx[i+1]+dx<<' '<<my[i+1]+dy<<endl;
+
+                ok=false;
+                break;
+            }
+        }
+        if(ok){
+            cout<<dx<<" "<<dy<<endl;
+            return 0;
+        }
+    }
     
+
     
 
     return 0;

@@ -30,9 +30,33 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+    vector<pair<ld,ld> >xy;
+    rep(i,n){
+        ld x,y;
+        cin>>x>>y;
+        xy.push_back(mkpr((ld)x,(ld)y));
+        // cout<<x<<' '<<y<<endl;
+
+
+    }
+    vint p(n);
+    int k=1;
+    rep(i,n)k*=1+i;
+    // cout<<k<<endl;
+    rep(i,n)p[i]=i;
+    long double sum=0;
+    do{
+        rep(i,n-1){
+            long double dx=xy[p[i]].first-xy[p[i+1]].first,dy=xy[p[i]].second-xy[p[i+1]].second;
+            // cout<<dx<<endl;
+            sum+=sqrtl(dx*dx+dy*dy);
+        }
+    }while(next_permutation(p.begin(), p.end()));
+    sum /= (ld)k;
+    printf("%.10Lf\n",sum);
+
     
 
     return 0;

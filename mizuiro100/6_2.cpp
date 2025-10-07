@@ -30,9 +30,41 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    int ans=0;
+    for(int a=0;a<10;++a){
+        for(int b=0;b<10;++b){
+            for(int c=0;c<10;++c){
+                int ok=0;
+                rep(i,n){
+                    if(ok==0){
+                        if(s[i]=='0'+a){
+                            ok++;
+                            continue;
+                        } 
+                    }
+                    else if(ok==1){
+                        if(s[i]=='0'+b){
+                            ok++;
+                            continue;
+                        } 
+                    }
+                    else if(ok==2){
+                        if(s[i]=='0'+c){
+                            ok++;
+                            ans++;
+                            break;
+                        } 
+                    }
+
+                }
+            }
+        }
+    }
+    cout<<ans<<endl;
     
 
     return 0;

@@ -30,8 +30,30 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    ll n,m;
+    cin>>n>>m;
+    vll a(n);
+    rep(i,n)cin>>a[i];
+    vll aa=a;
+    int nmm=-1;
+    rep(i,n){
+        int cnt=0;
+        while(aa[i]%2==0){
+            aa[i]/=2;
+            cnt++;
+        }
+        if(nmm==-1)nmm=cnt;
+        else if(nmm!=cnt){
+            cout<<0<<endl;
+            return 0;
+        }
+    }
+
+    ll lcms=1;
+    rep(i,n)lcms=lcm(lcms,a[i]/2);
+    cout<<m/lcms-m/(lcms*2)<<endl;
+
+
     
     
 

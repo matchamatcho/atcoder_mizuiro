@@ -30,8 +30,35 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n,k;
+    cin>>n>>k;
+    vll a(n);
+    rep(i,n)cin>>a[i];
+    ll ans=INFL;
+    for(int bit=0;bit<(1<<n);bit++){
+        ll mx=0;
+        ll now=0;
+        set<ll>st;
+        rep(i,n){
+            if(mx<a[i]){
+                st.insert(i);
+                mx=a[i];
+
+            }
+            else{
+                if(bit&(1<<i)){
+                    now+=mx-a[i]+1;
+                    st.insert(i);
+                    mx=mx+1;
+                
+                }
+
+            }
+        }
+        if(st.size()>=k)ans=min(ans,now);
+    }
+    cout<<ans<<endl;
+    
     
     
 
