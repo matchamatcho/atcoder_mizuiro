@@ -30,9 +30,27 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+    int q;
+    cin>>q;
+    int ans=0;
+    rep(qi,q){
+        int x;
+        cin>>x;
+        int l=0,r=n;
+        while(r-l>1){
+            int mid=(r+l)/2;
+            if(a[mid]<=x)l=mid;
+            else r=mid;
+
+
+        }
+        if(a[l]==x)ans++;
+    }
+    cout<<ans<<endl;
     
 
     return 0;

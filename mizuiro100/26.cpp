@@ -30,9 +30,34 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n,q;
+    cin >> n >> q;
+    vvi to(n);
+    rep(i,n-1){
+        int a,b;
+        cin >> a >> b;
+        a--;b--;
+        to[a].push_back(b);
+        to[b].push_back(a);
+    }
+    vint ans(n);
+    rep(qi,q){
+        int p,x;
+        cin >> p >> x;
+        p--;
+        ans[p]+=x;
+    }
+    // printv(ans);
+    auto dfs=[&](auto self,int now,int prev)->void{
+        for(auto next : to[now]){
+            if(next==prev) continue;
+            ans[next]+=ans[now];
+            self(self,next,now);
+        }
+    };
+    dfs(dfs,0,-1);
+    printv(ans);
+
     
 
     return 0;

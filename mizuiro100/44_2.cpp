@@ -30,10 +30,28 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
-    
+    vint table;
+    for(int i=1;i*(1+i)*(2+i)/6<1e6;++i){
+        table.push_back(i*(1+i)*(2+i)/6);
+    }
+    vint dp(1e6+1,INF),dp2(1e6+1,INF);
+    rep(i,1e6)dp[i]=i;
+    rep(i,1e6)dp2[i]=i;
+    for(int i = 1; i*(1+i)*(2+i)/6<1e6;++i){
+        vint old=dp,old2=dp2;
+        for(int j=1;j<1e6;++j){
+            if(j-table[i]>=0){
+                dp[j]=min(old[j],dp[j-table[i]]+1);
+                if(table[i]&1)dp2[j]=min(old2[j],dp2[j-table[i]]+1);
+            }
+        }
+    }
+    while(1){
+        int N;
+        cin >> N;
+        if(N==0)break;
+        cout << dp[N] << " " << dp2[N] << endl;
+    }
 
     return 0;
 }

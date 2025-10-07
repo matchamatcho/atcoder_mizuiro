@@ -27,12 +27,35 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; }
 const int INF =1001001001;
 const ll INFL = 4e18;
 
+ll f(string s){
+    ll ret=0;
 
+    ll hour =stoll(s.substr(0,2));
+    ll minute =stoll(s.substr(3,2));
+    ll second =stoll(s.substr(6,2));
+    ret=hour*3600+minute*60+second;
+
+
+    return ret;
+}
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    while(1){
+        int n;
+        cin>>n;
+        if(n==0)break;
+        vll s(24*3600+1);
+        rep(i,n){
+            string st,ed;
+            cin>>st>>ed;
+            s[f(st)]--;
+            s[f(ed)]++;
+        }
+        rep(i,24*3600)s[i+1]+=s[i];
+        ll ans=0;
+        for(auto x:s)chmin(ans,x);
+        cout<<-ans<<endl;
+    }
     
 
     return 0;

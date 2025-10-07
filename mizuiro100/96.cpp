@@ -30,9 +30,10 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    ll n;
+    cin>>n;
+
+    cout<<n*(n-1)/2<<endl;
     
 
     return 0;

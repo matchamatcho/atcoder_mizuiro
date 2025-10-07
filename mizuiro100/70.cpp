@@ -26,13 +26,24 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const int INF =1001001001;
 const ll INFL = 4e18;
-
+// a^n mod を計算する
+long long modpow(long long a, long long n, long long mod) {
+	long long res = 1;
+	while (n > 0) {
+		if (n & 1) res = res * a % mod;
+		a = a * a % mod;
+		n >>= 1;
+	}
+	return res;
+}
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    long long n,m;
+    cin>>m>>n;
+    long long MOD=1e9+7;
+    long long ans=modpow(m,n,MOD);
+    cout<<ans<<endl;
     
 
     return 0;

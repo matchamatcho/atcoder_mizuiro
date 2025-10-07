@@ -30,8 +30,23 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n;
+    cin>>n;
+    vll a(n),b(n);
+    ll ans=0;
+    rep(i,n){cin>>a[i]>>b[i];
+    ans+=abs(a[i]-b[i]);
+    }
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    ll s=a[n/2],g=b[n/2];
+    // ll ans=0;
+    rep(i,n){
+        ans+=abs(s-a[i])+abs(g-b[i]);
+
+    }
+    cout<<ans<<endl;
+
     
     
 

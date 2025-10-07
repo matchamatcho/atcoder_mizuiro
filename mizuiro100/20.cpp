@@ -30,10 +30,31 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
-    
+    ll n;
+    cin>>n;
+    vll a(n),b(n),c(n);
+    rep(i,n)cin>>a[i];
+    rep(i,n)cin>>b[i];
+    rep(i,n)cin>>c[i];
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    sort(c.begin(), c.end());
+
+    vll bc(n);
+    rep(i,n){
+        ll pos=upper_bound(c.begin(), c.end(),b[i])-c.begin();
+        bc[i]=n-pos;
+    }
+    vll s={0};
+    rep(i,n)s.push_back(s.back()+bc[i]);
+    ll ans=0;
+    rep(i,n){
+        int pos=upper_bound(b.begin(), b.end(),a[i])-b.begin();
+        ans+=s.back()-s[pos];
+
+    }
+    cout<<ans<<endl;
+
 
     return 0;
 }

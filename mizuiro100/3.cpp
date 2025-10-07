@@ -21,18 +21,33 @@ using vpll = vector<pll>;
 #define Rep(i,a,b) for(int i=a;i<b;i++)
 #define ALL(x) (x).begin(),(x).end()
 #define printv(x); for(auto now : x) cout << now << " "; cout << endl;
-#define yes(q) cout << ((q) ? "Yes" : "No") << endl;
+#define Yes(q) cout << ((q) ? "Yes" : "No") << endl;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
-const int INF =1001001001;
+const int INF=1001001001;
 const ll INFL = 4e18;
 
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    string s;
+    cin>>s;
+    int ans=0;
+    set<char> st{'A','T','G','C'};
+    for(int i=0;i<s.size();i++){
+        for(int j=i;j<s.size();j++){
+            bool ok=true;
+
+            for(int k=i;k<=j;k++){
+                if(st.count(s[k])==0){
+                    ok=false;
+                }
+            }
+            if(ok)ans=max(ans,j-i+1);
+
+        }
+    }
+    cout<<ans<<endl;
     
 
     return 0;

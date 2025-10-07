@@ -30,9 +30,42 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+    vvi dp(1,vint(n+1,INF));
+    dp[0][0]=-1;
+    rep(i,n){
+        int next=INF-1;
+        int k=0;
+        next=a[i];
+        while(next!=INF){
+            
+            int index=lower_bound(dp[k].begin(), dp[k].end(),next)-dp[k].begin();
+            if(dp[k][index]==INF){dp[k][index]=next;
+            break;}
+            else if(dp[k][index]>next){
+                swap(dp[k][index],next);
+                k++;
+                dp.push_back(vint(n+1,INF));
+                dp[k][0]=-1;
+            }
+            else{
+                k++;
+                dp.push_back(vint(n+1,INF));
+                dp[k][0]=-1;
+            }
+        }
+
+    }
+    int ans=0;
+    rep(i,dp.size()){
+        // printv(dp[i]);
+    if(dp[i][0]==-1)ans++;}
+    cout<<ans<<endl;
+
+
     
 
     return 0;

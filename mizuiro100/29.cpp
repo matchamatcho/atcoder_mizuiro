@@ -30,9 +30,42 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int R,C;
+    cin >> R >> C;
+    // cout<<R<<' '<<C<<endl;
+    vstr c(R);
+   
+    vvi visited(R, vint(C, 0));
+    queue<pii> q;
+    int sy,sx,gy,gx;
+    cin >> sy >> sx >> gy >> gx;
+    rep(i,R) cin >> c[i];
+    // cout<<sy<<endl;
+    sy--; sx--; gy--; gx--;
+    q.push({sy,sx});
+    // cout<<111<<endl;
+    // cout<<sy<<endl;
+    visited[sy][sx] = 1;
+    // cout<<111<<endl;
+    int dx[4] = {1,0,-1,0};
+    int dy[4] = {0,1,0,-1};
     
+    while(!q.empty()){
+        auto now = q.front();
+        q.pop();
+        int y = now.first;
+        int x = now.second;
+        rep(k,4){
+            int ny = y + dy[k];
+            int nx = x + dx[k];
+            if(ny < 0 || ny >= R || nx < 0 || nx >= C) continue;
+            if(c[ny][nx] == '#' || visited[ny][nx]) continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny,nx});
+        }
+    }
+    cout << visited[gy][gx] - 1 << endl;
+
     
 
     return 0;

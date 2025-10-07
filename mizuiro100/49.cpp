@@ -30,9 +30,45 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    // cout<<666<<endl;
+
+    int V,E;
+    cin>>V>>E;
+        // cout<<666<<endl;
+
+    vvi to(V,vint(V,-1));
+            // cout<<666<<endl;
+
+    rep(i,E){
+        int u,v,d;
+        cin>>u>>v>>d;
+        // u--;v--;
+        to[u][v]=d;
+    }
+    // cout<<777<<endl;
+    vvi dp(1<<V,vint(V,INF));
+    dp[0][0]=0;
+    // cout<<333<<endl;
+    auto rec=[&](auto self,int s,int v)->int{
+        // cout<<s<<' '<<v<<endl;
+        if(dp[s][v]!=INF)return dp[s][v];
+        if(s==0){
+            if(v==0)return 0;
+            else return INF;
+        }
+        if((s&(1<<v))==0)return INF;
+
+        rep(i,V){
+            if(to[i][v]==-1)continue;
+            if(self(self,s^(1<<v),i)==INF)continue;
+            chmin(dp[s][v],self(self,s^(1<<v),i)+to[i][v]);
+        }
+        return dp[s][v];
+    };
+    int ans=rec(rec,(1<<V)-1,0);
+    if(ans==INF)ans=-1;
+    cout<<ans<<endl;
+
     
 
     return 0;

@@ -1,3 +1,4 @@
+//出来てない
 #include <bits/stdc++.h>
 // #include <atcoder/all>
 using namespace std;
@@ -30,8 +31,30 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n,m,Q;
+    cin>>n>>m>>Q;
+    vll l(m),r(m);
+    rep(i,m)cin>>l[i]>>r[i];
+    vll p(Q),q(Q);
+    rep(i,Q)cin>>p[i]>>q[i];
+    vll s(n+1);
+    vll st(n+1),ed(n+1);
+
+    rep(i,m){
+        for(int j=l[i];j<=r[i];j++)s[j]++;
+        st[l[i]]++;
+        ed[r[i]]++;
+    }
+    rep(i,n) st[i+1] += st[i];
+    rep(i,n) ed[i+1] += ed[i];
+    // printv(s);
+    rep(i,n) s[i+1] += s[i];
+    // printv(s);
+    printv(st);
+    printv(ed);
+    rep(i,Q){
+        
+    }
     
     
 

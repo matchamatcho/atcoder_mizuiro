@@ -30,9 +30,25 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n;
+    cin>>n;
+    vll ab(1e6+2);
+    vint a(n),b(n);
+    rep(i,n){cin>>a[i]>>b[i];
+    ab[a[i]]++;
+    ab[b[i]+1]--;
+}
     
+    rep(i,1e6+1)ab[i+1]+=ab[i];
+    ll ans=0;
+    ll index=-1;
+    rep(i,1e6+2){
+        if(chmax(ans,ab[i]))index=i;
+    }
+    cout<<ans<<endl;
+
+    
+
     
 
     return 0;

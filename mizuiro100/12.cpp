@@ -30,9 +30,36 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n,m;
+    cin>>n>>m;
+    vvi xy(n,vint(n));
+    rep(i,m){
+        int x,y;
+        cin>>x>>y;
+        x--;y--;
+        xy[x][y]=1;
+        xy[y][x]=1;
+    }
+    rep(i,n)xy[i][i]=1;
+    int ans=0;
+    for(int bit=0;bit<(1<<n);++bit){
+        bool ok=true;
+        int cnt=0;
+        rep(i,n){
+            if(bit&(1<<i)){
+                cnt++;
+                rep(j,n){
+                    if(bit&(1<<j)){
+                        // cnt++;
+                        if(xy[i][j]==0)ok=false;
+                    }
+                }
+            }
+        }
+        if(ok)ans=max(ans,cnt);
+    }
+    cout<<ans<<endl;
+
     
 
     return 0;

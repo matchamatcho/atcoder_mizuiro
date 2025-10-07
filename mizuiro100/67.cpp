@@ -1,10 +1,31 @@
 #include <bits/stdc++.h>
+// #include <atcoder/all>
 using namespace std;
-
-/* UnionFind：素集合系管理の構造体(union by rank)
-    isSame(x, y): x と y が同じ集合にいるか。 計算量はならし O(α(n))
-    unite(x, y): x と y を同じ集合にする。計算量はならし O(α(n))
-*/
+// using namespace atcoder;
+// using mint = modint998244353;
+using ll = long long;
+using ull = unsigned long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll,ll>;
+using vstr = vector<string>;
+using vint = vector<int>;
+using vvi = vector<vint>;
+using vll = vector<ll>;
+using vvll = vector<vll>;
+using vpii = vector<pii>;
+using vvpii = vector<vpii>;
+using vpll = vector<pll>;
+#define mkpr make_pair
+#define rep(i, n) for (int i = 0; i < (n); ++i)
+#define Rep(i,a,b) for(int i=a;i<b;i++)
+#define ALL(x) (x).begin(),(x).end()
+#define printv(x); for(auto now : x) cout << now << " "; cout << endl;
+#define yes(q) cout << ((q) ? "Yes" : "No") << endl;
+template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
+template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
+const int INF =1001001001;
+const ll INFL = 4e18;
 struct UnionFind {  // The range of node number is u 0 v n-1
     vector<int> rank, parents;
     UnionFind() {}
@@ -74,17 +95,33 @@ struct Kruskal {
 // Kruskal krs(edges, V);
 // cout << krs.sum << endl;
 
-int main() {
-    int V, E;
-    cin >> V >> E;
-    vector<Edge> edges(E);
-    for (int i = 0; i < E; i++) {
-        long long s, t, w;
-        cin >> s >> t >> w;
-        Edge e = {s, t, w};
-        edges[i] = e;
+
+int main()
+{
+    int n;
+    cin>>n;
+    vpll x(n),y(n);
+    rep(i,n){
+        cin>>x[i].first>>y[i].first;
+        x[i].second=i;
+        y[i].second=i;
     }
-    Kruskal krs(edges, V);
-    cout << krs.sum << endl;
+    sort(ALL(x));
+    sort(ALL(y));
+    vector<Edge> edges;
+    rep(i,n-1){
+    Edge e;
+    e.u=x[i].second;
+    e.v=x[i+1].second;
+    e.cost=abs(x[i].first-x[i+1].first);
+    edges.push_back(e);
+    e.u=y[i].second;
+    e.v=y[i+1].second;
+    e.cost=abs(y[i].first-y[i+1].first);
+    edges.push_back(e);
+}
+    Kruskal krs(edges,n);
+    cout<<krs.sum<<endl;
+
     return 0;
 }

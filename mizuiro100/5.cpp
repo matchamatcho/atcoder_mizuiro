@@ -30,9 +30,18 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    ll a,b,c,x,y;
+    cin>>a>>b>>c>>x>>y;
+    ll ans=INFL;
+    for(ll i=0;i<=2*max(x,y);i+=2){
+        ll now=c*i;
+        ll lefta=max(x-i/2,ll (0));
+        ll leftb=max(y-i/2,ll(0));
+        now+=lefta*a+leftb*b;
+        chmin(ans,now);
+
+    }
+    cout<<ans<<endl;
     
 
     return 0;

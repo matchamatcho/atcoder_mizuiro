@@ -30,8 +30,29 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int q;
+    cin >> q;
+    rep(qi,q){
+        string x,y;
+        cin >> x >> y;
+        int nx = x.size();
+        int ny = y.size();
+        vvi dp(nx+1, vector<int>(ny+1));
+        rep(i,nx){
+            rep(j,ny){
+                dp[i+1][j+1]=dp[i][j];
+                if(x[i]==y[j]){
+                    dp[i+1][j+1]+=1;
+                }
+                chmax(dp[i+1][j+1],dp[i][j+1]);
+                chmax(dp[i+1][j+1],dp[i+1][j]);
+
+
+            }
+        }
+        cout << dp[nx][ny] << endl;
+    }
+ 
     
     
 

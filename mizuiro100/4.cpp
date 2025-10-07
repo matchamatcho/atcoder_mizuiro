@@ -30,9 +30,23 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n,m;
+    cin>>n>>m;
+    vvll a(n,vll(m));
+    rep(i,n)rep(j,m)cin>>a[i][j];
+    ll ans=0;
+    for(int i=0;i<m;++i){
+        for(int j=1+i;j<m;++j){
+            ll now=0;
+            for(int k=0;k<n;++k){
+                now+=max(a[k][i],a[k][j]);
+            }
+            chmax(ans,now);
+
+
+        }
+    }
+    cout<<ans<<endl;
     
 
     return 0;

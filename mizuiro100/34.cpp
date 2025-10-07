@@ -30,9 +30,16 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    vint dp={1,1};
+    for(int i=2;i<45;++i){
+        dp.push_back(dp[i-1]+dp[i-2]);
+
+    }
+    int n;
+    cin>>n;
+    cout<<dp[n]<<endl;
+    // printv(dp)
+
     
 
     return 0;

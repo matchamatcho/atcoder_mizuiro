@@ -28,11 +28,36 @@ const int INF =1001001001;
 const ll INFL = 4e18;
 
 
+
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int N;
+    cin>>N;
+    vint a(N),b(N);
+    rep(i,N) cin>>a[i]>>b[i];
+    vvi visited(N+1,vint(N+1,-1));
+    auto dfs=[&](auto self,int l,int r)->int{
+        if (visited[l][r]!=-1) return visited[l][r];
+        if(l+1==r-1){
+            // cout<<l<<" "<<r<<" "<<a[l]*b[l]*b[l+1]<<endl;
+            visited[l][r]=a[l]*b[l]*b[r-1];
+            return a[l]*b[l]*b[r-1];
+        }
+        else if(l>=r-1){
+            visited[l][r]=0;
+            return 0;
+        }
+        int now=INF;
+        for(int i=l+1;i<r;++i){
+            chmin(now,self(self,l,i)+self(self,i,r)+a[l]*b[i-1]*b[r-1]);
+        }
+        visited[l][r]=now;
+        return now;
+    };
+    cout<<dfs(dfs,0,N)<<endl;
+    // cout<<visited[2][4]<<endl;
+
+
     
 
     return 0;

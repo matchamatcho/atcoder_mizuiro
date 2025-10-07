@@ -30,9 +30,25 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n,m;
+    cin>>n>>m;
+    vint s(n-1);
+    rep(i,n-1)cin>>s[i];
+    vint a(m);
+    rep(i,m)cin>>a[i];
+    vint ss={0};
+    rep(i,n-1)ss.push_back((ss.back()+s[i])%100000);
+    int now=0;
+    int ans=0;
+    rep(i,m){
+        // cout<<now<<" "<<now+a[i]<<endl;
+        ans+=ss[max(now,now+a[i])]-ss[min(now+a[i],now)];
+        ans%=100000;
+        now+=a[i];
+
+    }
+    cout<<ans<<endl;
+
     
 
     return 0;

@@ -30,9 +30,37 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
-    
+    int n;
+    cin>>n;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+    int q;
+    cin>>q;
+    vint m(q);
+    rep(i,q)cin>>m[i];
+    vint d(1<<n);
+    for(int bit=0;bit<(1<<n);++bit){
+        int sum=0;
+        for(int i=0;i<n;++i){
+            if(bit&(1<<i)){
+                sum+=a[i];
+            }
+        }
+        d[bit]=sum;
+    }
+    rep(qi,q){
+        bool ok=true;
+        for(int bit=0;bit<(1<<n);++bit){
+            int sum=d[bit];
+            if(sum==m[qi]){
+                ok=false;
+                cout<<"yes"<<endl;
+                break;
+            }
+        }
+        
+        if(ok)cout<<"no"<<endl;
+    }
     
 
     return 0;

@@ -30,8 +30,21 @@ const ll INFL = 4e18;
 
 int main()
 {
-    cout<<__cplusplus<<endl;
-    cout<<"";
+    int n;
+    cin>>n;
+    vint c(n);
+    rep(i,n)cin>>c[i];
+    vint dp(n+1,INF);
+    dp[0]=-1;
+    rep(i,n){
+        int index=lower_bound(dp.begin(), dp.end(),c[i])-dp.begin();
+        chmin(dp[index],c[i]);
+    }
+    int ans=0;
+    rep(i,n){
+        if(dp[i+1]<INF)ans=i+1;
+    }
+    cout<<n-ans<<endl;
     
     
 
