@@ -30,6 +30,27 @@ const ll INFL = 4e18;
 
 int main()
 {
+    int n;
+    cin>>n;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+    int q;
+    cin>>q;
+    rep(i,q){
+        int t;
+        cin>>t;
+        if(t==1){
+
+            int k,x;
+            cin>>k>>x;
+            a[k-1]=x;
+        }
+        else{
+            int k;
+            cin>>k;
+            cout<<a[k-1]<<endl;
+        }
+    }
     
 
     return 0;

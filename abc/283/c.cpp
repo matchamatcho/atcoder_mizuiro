@@ -30,6 +30,34 @@ const ll INFL = 4e18;
 
 int main()
 {
+    string s;
+    cin>>s;
+
+    int n=s.size();
+    int index=0;
+    int ans=0;
+    while(index<n){
+        if(index==n-1){
+            ans++;
+            break;
+        }
+        if(s[index]!=s[index+1]){
+            ans++;
+            index++;
+        }
+        else if(s[index]=='0'){
+            ans++;
+            index+=2;
+        }
+        else{
+            ans+=2;
+            index+=2;
+        }
+
+    }
+    cout<<ans<<endl;
+
+    
     
 
     return 0;

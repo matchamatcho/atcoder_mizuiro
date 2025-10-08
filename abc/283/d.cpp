@@ -30,7 +30,36 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    string s;
+    cin>>s;
+
+    set<char> used;
+    int n=s.size();
+    stack<char>q;
+    rep(i,n){
+        if(s[i]=='('){
+            q.push(s[i]);
+            used.insert(s[i]);
+
+        }
+        else if(s[i]==')'){
+            while(q.top()!='('){
+                used.erase(q.top());
+                q.pop();
+            }
+            q.pop();
+
+        }
+        else{
+            if(used.find(s[i])!=used.end()){
+                cout<<"No"<<endl;
+                return 0;
+            }
+            used.insert(s[i]);
+            q.push(s[i]);
+        }
+    }
+    cout<<"Yes"<<endl;
 
     return 0;
 }
