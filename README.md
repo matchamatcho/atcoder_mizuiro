@@ -6,8 +6,3 @@ https://qiita.com/e869120/items/eb50fdaece12be418faa#2-3-%E5%88%86%E9%87%8E%E5%8
 
 -----------------------------------
 
-git push https://github.com/matchamatcho/atcoder_mizuiro.git desktoppc
-
-git push https://github.com/matchamatcho/atcoder_mizuiro.git notepc
-
-git pull https://github.com/matchamatcho/atcoder_mizuiro.git main
