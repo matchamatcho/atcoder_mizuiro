@@ -22,6 +22,13 @@ using vpll = vector<pll>;
 #define ALL(x) (x).begin(),(x).end()
 #define printv(x); for(auto now : x) cout << now << " "; cout << endl;
 #define Yes(q) cout << ((q) ? "Yes" : "No") << endl;
+#define priv(value) print_variable(#value, value)
+// 汎用的な表示関数テンプレート
+// どんな型 T の変数でも受け取れるようにする
+template <typename T>
+void print_variable(const std::string& name, const T& value) {
+    std::cout << "変数名: " << name << ", 値: " << value << std::endl;
+}
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const int INF=1001001001;
