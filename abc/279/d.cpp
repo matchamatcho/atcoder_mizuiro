@@ -37,7 +37,28 @@ const ll INFL = 4e18;
 
 int main()
 {
+    ll a,b;
+    cin>>a>>b;
+
+    auto f=[&](ll x)->double{
+        return (double)b*x+(double)a/sqrt(1.0+x);
+    };
     
+    ll low=0,high=a/b;
+    while(abs(high-low)>2){
+        // cout<<low<<" "<<high<<endl;
+        ll mid1=(low*2+high)/3;
+        ll mid2=(low+high*2)/3;
+        if(f(mid1)>f(mid2)){
+            low=mid1;
+        }else{
+            high=mid2;
+        }
+
+    }
+    // cout<<f(2)<<endl;
+    // cout<<f(low)<<" "<<f(high)<<endl;
+    cout<<fixed<<setprecision(10)<<min(min(f(low),f(high)),f(low+1))<<endl;
 
     return 0;
 }
