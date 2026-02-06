@@ -37,7 +37,22 @@ const ll INFL = 4e18;
 
 int main()
 {
+    string s,t;
+    cin>>s>>t;
+    if(t.size()>s.size()){
+        Yes(0);
+        return 0;
+    }
+    rep(i,s.size()-t.size()+1){
+        string n=s.substr(i,t.size());
+        if(n==t){
+            cout<<"Yes"<<endl;
+            return 0;
+        }
+    }
+    cout<<"No"<<endl;
     
+
 
     return 0;
 }

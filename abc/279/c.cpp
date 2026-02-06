@@ -37,7 +37,37 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int h,w;
+    cin>>h>>w;
+
+    vstr s(w);
+    rep(i,h){
+        string ss;
+        cin>>ss;
+        rep(i,w){
+            s[i]+=ss[i];
+        }
+    }
+    map<string,int>mp;
+    rep(i,w)mp[s[i]]++;
+
+
+    vstr t(w);
+    rep(i,h){
+        string ss;
+        cin>>ss;
+        rep(i,w){
+            t[i]+=ss[i];
+        }
+    }
+    rep(i,w){
+        if(mp[t[i]]==0){
+            cout<<"No"<<endl;
+            return 0;
+        }
+        mp[t[i]]--;
+    }
+    cout<<"Yes"<<endl;
 
     return 0;
 }

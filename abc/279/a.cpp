@@ -37,7 +37,16 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int ans=0;
+    string s;
+    cin>>s;
+    for(char c:s){
+        if(c=='v')ans++;
+        else{
+            ans+=2;
+        }
+    }
+    cout<<ans<<endl;
 
     return 0;
 }
