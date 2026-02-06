@@ -32,8 +32,18 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
-    
+    int n,k;
+    cin>>n>>k;
+
+    int now=0;
+    int ans=0;
+    while(now<k){
+        now+=n+ans;
+        ans++;
+        
+    }
+    cout<<ans-1<<endl;
+
 
     return 0;
 }

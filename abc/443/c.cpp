@@ -32,7 +32,21 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int n,t;
+    cin>>n>>t;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+
+    int ans=0;
+
+    int lst=0;
+    rep(i,n){
+        if(lst>a[i])continue;
+        ans+=a[i]-lst;
+        lst=a[i]+100;
+    }
+    ans+=(max(0,t-lst));
+    cout<<ans<<endl;
     
 
     return 0;

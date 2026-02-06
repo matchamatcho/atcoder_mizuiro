@@ -32,7 +32,9 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    string s;
+    cin>>s;
+    cout<<s<<"s"<<endl;
     
 
     return 0;
