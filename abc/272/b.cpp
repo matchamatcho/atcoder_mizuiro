@@ -32,7 +32,22 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int n,m;
+    cin>>n>>m;
+    set<pii>st;
+    rep(i,m){
+        int k;
+        cin>>k;
+        vint X(k);
+        rep(j,k){
+            cin>>X[j];
+        }
+        rep(j,k)rep(jj,j){
+            st.insert({X[j],X[jj]});
+        }
+    }
+
+    yes(st.size()==n*(n-1)/2);
     
 
     return 0;

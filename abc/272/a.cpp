@@ -32,8 +32,15 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
-    
+    int n;
+    cin>>n;
+    int ans=0;
+    rep(i,n){
+        int a;
+        cin>>a;
+        ans+=a;
+    }
+    cout<<ans<<endl;  
 
     return 0;
 }

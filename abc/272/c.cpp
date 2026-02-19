@@ -32,6 +32,39 @@ const ll INFL = 4e18;
 
 int main()
 {
+    int n;
+    cin>>n;
+    vint a(n);
+    rep(i,n)cin>>a[i];
+    vint a2,a1;
+
+    int n2=0,n1=0;
+    rep(i,n){
+        if(a[i]%2==0){n2++;a2.push_back(a[i]);}
+        else {a1.push_back(a[i]);n1++;}
+    }
+    if(n==2){
+        if(n2==1){
+            cout<<-1<<endl;
+        }
+        else {
+            cout<<a[0]+a[1]<<endl;
+
+        }
+        return 0;
+
+    }
+    sort(ALL(a2));
+    sort(ALL(a1));
+    int ans=0;
+    if(n2>1){
+        chmax(ans,a2.back()+a2[a2.size()-2]);
+    }
+    if(n1>1){
+        chmax(ans,a1.back()+a1[a1.size()-2]);
+    }
+    cout<<ans<<endl;
+
     
     
 

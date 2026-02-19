@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
 using namespace std;
+#if __has_include(<atcoder/all>)
+#include <atcoder/all>
 using namespace atcoder;
-using mint = modint998244353;
+#endif
+// using mint = modint998244353;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -21,22 +23,16 @@ using vpll = vector<pll>;
 #define Rep(i,a,b) for(int i=a;i<b;i++)
 #define ALL(x) (x).begin(),(x).end()
 #define printv(x); for(auto now : x) cout << now << " "; cout << endl;
-#define Yes(q) cout << ((q) ? "Yes" : "No") << endl;
-#define priv(value) print_variable(#value, value)
-// 汎用的な表示関数テンプレート
-// どんな型 T の変数でも受け取れるようにする
-template <typename T>
-void print_variable(const std::string& name, const T& value) {
-    std::cout << "変数名: " << name << ", 値: " << value << std::endl;
-}
+#define yes(q) cout << ((q) ? "Yes" : "No") << endl;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
-const int INF=1001001001;
+const int INF =1001001001;
 const ll INFL = 4e18;
 
 
 int main()
 {
+    
     
 
     return 0;
