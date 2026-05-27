@@ -32,7 +32,18 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    string s;
+    cin>>s;
+    ll ans=0;
+    int n=s.size();
+    rep(i,n){
+        if(s[i]=='C'){
+            ans++;
+            ans+=min(i,n-i-1);
+        }
+
+    }
+    cout<<ans<<endl;
     
 
     return 0;

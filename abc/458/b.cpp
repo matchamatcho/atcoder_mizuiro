@@ -33,7 +33,18 @@ const ll INFL = 4e18;
 int main()
 {
     
-    
+    int h,w;
+    cin>>h>>w;
+    vvi ans(h,vint(w));
+
+    rep(i,h)rep(j,w){
+        if(i>0)ans[i][j]++;
+        if(i<h-1)ans[i][j]++;
+        if(j>0)ans[i][j]++;
+                if(j<w-1)ans[i][j]++;
+
+    }
+    rep(i,h){printv(ans[i])};
 
     return 0;
 }

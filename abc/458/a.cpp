@@ -32,7 +32,11 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    string s;
+    int n;
+    cin>>s>>n;
+    cout<<s.substr(n,s.size()-2*n)<<endl;
+
     
 
     return 0;

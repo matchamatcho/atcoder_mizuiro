@@ -32,7 +32,42 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    ll x;
+    int q;
+    cin>>x>>q;
+    std::priority_queue<
+      int,                // 要素の型はint
+      std::vector<int>,   // 内部コンテナはstd::vector (デフォルトのまま)
+      std::greater<int>   // 昇順 (デフォルトはstd::less<T>)
+    > q1;
+    q1.push(x);
+
+    // 降順に処理する
+  std::priority_queue<int> q2;
+
+    rep(i,q){
+        ll a,b;
+        cin>>a>>b;
+        if(q1.top()<=a)q1.push(a);
+        else q2.push(a);
+        if(q1.top()<=b)q1.push(b);
+        else q2.push(b);
+        if(q1.size()==q2.size()+3){
+            q2.push(q1.top());
+            q1.pop();
+        }
+        else if(q2.size()>q1.size()){
+            q1.push(q2.top());
+            q2.pop();
+        }
+        cout<<q1.top()<<endl;
+
+        
+        
+
+
+
+    }
     
 
     return 0;
