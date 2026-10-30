@@ -23,6 +23,9 @@ using P = pair<long long, int>;
 void dijkstra(const Graph &G, int s, vector<long long> &dis, vector<int> &prev) {
     int N = G.size();
     dis.resize(N, INFL);
+    for(int i=0;i<N;i++){
+        dis[i]=INFL;
+    }
     prev.resize(N, -1); // 初期化
     priority_queue<P, vector<P>, greater<P>> pq; 
     dis[s] = 0;
