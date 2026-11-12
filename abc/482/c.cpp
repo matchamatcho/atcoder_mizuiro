@@ -32,7 +32,22 @@ const ll INFL = 4e18;
 
 int main()
 {
-    
+    int h,w,n,q;
+    cin>>h>>w>>n>>q;
+    vint r(n),c(n);
+    rep(i,n)cin>>r[i]>>c[i];
+    sort(ALL(r));sort(ALL(c));
+    rep(qi,q){
+        int t,x,y;
+        cin>>t>>x>>y;
+        if(t==1){
+            cout<<upper_bound(ALL(r),y)-lower_bound(ALL(r),x)<<endl;
+        }
+        else{
+            cout<<upper_bound(ALL(c),y)-lower_bound(ALL(c),x)<<endl;
+        }
+
+    }
     
 
     return 0;
